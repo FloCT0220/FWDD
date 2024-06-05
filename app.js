@@ -13,7 +13,7 @@ const db = mysql.createConnection({
   host: '127.0.0.1', 
   user: 'root', 
   password: '0220', 
-  database: 'addressbook', 
+  database: 'user', 
 }); 
 db.connect((err) => {
   if (err) { 
@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 // route database
 const addressbookRoutes = require('./routes/addressbook')(db); 
 app.use('/', addressbookRoutes); 
@@ -72,8 +72,9 @@ app.get('/course', (req, res) => {
   res.render('course'); 
 });
 
-
-
+app.get('/addressbook', (req, res) => { 
+  res.render('addressbook'); 
+});
 
 app.get('/apple_info', (req, res) => { 
   res.render('apple_info'); 
@@ -124,7 +125,7 @@ app.use(function(req, res, next) {
 
 // Handle login form submission 
 app.post('/login', (req, res) => { 
-  let sql = 'SELECT * FROM users WHERE user_email = ? AND user_password = ?';
+  let sql = 'SELECT * FROM user WHERE email = ? AND password = ?';
    let query = db.query(sql, [req.body.useremail, req.body.userpassword], (err, result) => { if (err) throw err; if (result.length > 0) { 
   // Login successful, set session and redirect to dashboard
     req.session.user = result[0]; // Save the user object to the session 

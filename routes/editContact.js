@@ -20,7 +20,7 @@ module.exports = (db) => {
     const query = 'UPDATE contacts SET name = ?, email = ?, phone = ? WHERE id = ?';
     db.query(query, [name, email, phone, contactId], (err, result) => {
       if (err) throw err;
-      res.redirect(`/addressBook`);
+      res.redirect(`/user`);
     });
   });
   return router;

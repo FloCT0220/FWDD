@@ -1,0 +1,51 @@
+body {
+    background-color: rgb(216, 216, 216);
+    flex-grow: 1;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+  
+  a {
+    font-weight: bold;
+  }
+  .padding {
+    padding: 0px;
+    display: inline-flex;
+    padding-top: 20px; 
+  }
+  
+  .gap{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .name{
+    margin-right: 35px;
+    padding-right: 20px;
+  }
+  .loginButton{
+    position: absolute;
+    right: 25px;
+  }
+  h1{
+    position: absolute;
+    left: 20px;
+  }
+  
+  .navbar{
+    background-color: rgb(175, 255, 172);
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  nav, nav-pills, nav-item {
+    color: black;
+  }
+
+  footer {
+    background-color: rgb(175, 255, 172);
+    flex-wrap: wrap;
+    text-align: center;
+    flex-shrink: 0; /* Don't allow the footer to shrink */
+    margin-top: auto; /* Push the footer to the bottom */
+    padding: 20px 0;
+    width: 100%;
+  }

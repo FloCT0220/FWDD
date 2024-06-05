@@ -1,5 +1,5 @@
-CREATE DATABASE Student; 
-USE Student; 
+CREATE DATABASE user; 
+USE user; 
 CREATE TABLE user ( 
 id INT AUTO_INCREMENT PRIMARY KEY, 
 name VARCHAR(255), 

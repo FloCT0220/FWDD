@@ -7,7 +7,7 @@ module.exports = (db) => {
     const query = 'DELETE FROM contacts WHERE id = ?';
     db.query(query, [contactId], (err, result) => {
       if (err) throw err;
-      res.redirect(`/addressbook`);
+      res.redirect(`/user`);
     });
   });
   return router;

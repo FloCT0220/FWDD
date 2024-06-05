@@ -7,7 +7,7 @@ module.exports = function(db) {
     var email = req.query.email; 
     db.connect(function(err) { 
       if (err) throw err; 
-      db.query("SELECT * FROM users WHERE user_email = ?", [email], function (err, result) { 
+      db.query("SELECT * FROM user WHERE email = ?", [email], function (err, result) { 
         if (err) throw err; 
         var exists = result.length > 0;
         res.json({ exists: exists }); 

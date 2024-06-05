@@ -7,7 +7,7 @@ module.exports = (db) => {
     const query = 'INSERT INTO contacts (name, email, phone) VALUES (?, ?, ?)'; 
     db.query(query, [name, email, phone], (err, results) => { 
       if (err) throw err; 
-      res.redirect('/addressbook'); 
+      res.redirect('/user'); 
     }); 
   }); 
   return router; 

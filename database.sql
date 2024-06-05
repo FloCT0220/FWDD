@@ -1,9 +1,9 @@
 CREATE DATABASE user; 
 USE user; 
-CREATE TABLE user ( 
+CREATE TABLE users ( 
 id INT AUTO_INCREMENT PRIMARY KEY, 
-name VARCHAR(255), 
-email VARCHAR(255) NOT NULL, 
-password VARCHAR(255) NOT NULL 
+user_name VARCHAR(255)NOT NULL, 
+user_email VARCHAR(255) NOT NULL, 
+user_password VARCHAR(255) NOT NULL 
 );
 

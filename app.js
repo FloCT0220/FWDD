@@ -15,6 +15,7 @@ const db = mysql.createConnection({
   password: '0220', 
   database: 'user', 
 }); 
+
 db.connect((err) => {
   if (err) { 
     console.error('Database connection failed:', err); 
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+
 // route database
 const addressbookRoutes = require('./routes/addressbook')(db); 
 app.use('/', addressbookRoutes); 
@@ -55,6 +57,9 @@ app.use('/', deleteRoutes);
 var registerRoutes = require('./routes/register'); 
 app.use('/register', registerRoutes);
 
+const loginRoutes = require('./routes/login');
+app.use('/login', loginRoutes); 
+
 var checkEmailRoute = require('./routes/email')(db); 
 app.use('/', checkEmailRoute);
 
@@ -64,10 +69,12 @@ app.use(session({
   secret: 'fwdd', 
   resave: false, 
   saveUninitialized: true, 
-  cookie: { secure: false } // Note: the `secure` option should be enabled only if you are serving your app over HTTPS 
+  cookie: { secure: true } // Note: the `secure` option should be enabled only if you are serving your app over HTTPS 
 }));
 
 //
+
+
 app.get('/course', (req, res) => { 
   res.render('course'); 
 });
@@ -88,11 +95,15 @@ app.get('/vid', (req, res) => {
 app.get('/map', (req, res) => { 
   res.render('map'); 
 });
-app.get('/login', (req, res) => { res.render('login'); }); // Handle login form submission app.post('/login', (req, res) => { let sql = 'SELECT * FROM users WHERE user_email = ? AND user_password = ?'; let query = db.query(sql, [req.body.useremail, req.body.userpassword], (err, result) => { if (err) throw err; if (result.length > 0) { // Login successful, set session and redirect to dashboard
 
-app.get('/login', (req, res) => { 
-  res.render('login'); 
-}); 
+
+// app.get('/login', (req, res) => { 
+//   res.render('login'); 
+// }); 
+
+app.get('/register', (req, res) => { 
+  res.render('register'); 
+});
 
 app.get('/dashboard', (req, res) => { 
   if (!req.session.user) { // User is not logged in, redirect to login page 

@@ -1,42 +1,19 @@
-doctype html
-html
-  head
-    title Your Title Here
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    .container#container
-      .form-container.sign-up
-        form#register-button(method='post') 
-          h1 Create Account
-          label(for='name') Name: 
-          input#name(type='text', name='name', required) 
-          label(for='email') Email: 
-          input#email(type='email', name='email', required) 
-          label(for='password') Password: 
-          input#password(type='password', name='password', required) 
-          button#register-button(type='submit') Register 
-          button#register-button(type='reset') Reset 
-          p#email-error 
-      .form-container.sign-in
-        form(action="/login" method="post") 
-          h1 Login
-          label(for="useremail") Email: 
-          input(type="email" id="useremail" name="useremail") 
-          label(for="userpassword") Password: 
-          input(type="password" id="userpassword" name="userpassword") 
-          a(href='#') Forget Your Password?
-          button(type='submit') Login
-      .toggle-container
-        .toggle
-          .toggle-panel.toggle-left
-            h1 Welcome Back!
-            p Enter your personal details to use all site features
-            button#login Sign In
-          .toggle-panel.toggle-right
-            h1 Hello, Friend!
-            p Register with your personal details to use all site features
-            button#register Sign Up
-
-  script(src='login.js')
+doctype html 
+html 
+  head 
+    title Login Page 
+    link(href="/stylesheets/register.css", rel="stylesheet") 
+    
+  body 
+    form#register-form(action="/login" method="post") 
+      h1 Login 
+      div 
+        label(for="useremail") Email: 
+        input#email(type="email" name="useremail", required) 
+      div 
+        label(for="userpassword") Password: 
+        input#password(type="password" name="userpassword", required) 
+      div 
+        input#register-button(type="submit" value="Login")
+        a(href="/") Go to Home
+        p#email-error 

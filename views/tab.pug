@@ -1,0 +1,27 @@
+doctype html 
+html 
+  head 
+    link(rel="icon", href="/images/apple.png", type="image/jpg", sizes="16x16")
+    link(rel='stylesheet', href='/stylesheets/jquery-ui.css')
+  body 
+    div#tabs 
+      ul 
+        li 
+          a(href="#tab1" title="About the Company") About Us
+        li 
+          a(href="#tab2") Services 
+        li 
+          a(href="#tab3") Facilities 
+      div#tab1 
+        p This is About Us 
+      div#tab2 
+        p Services 
+      div#tab3 
+        p Facilities
+
+  script(src='/javascripts/jquery.js') 
+  //- This need to be first - //
+  script(src='/javascripts/jquery-ui.js')
+  //- This need to be second - //
+  script(src='/javascripts/tab.js')
+  //- This need to be third - //

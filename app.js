@@ -6,9 +6,12 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
 // database
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+
+
 const db = mysql.createConnection({ 
   host: '127.0.0.1', 
   user: 'root', 
@@ -54,8 +57,7 @@ app.use('/', editRoutes);
 const deleteRoutes = require('./routes/deleteContact')(db); 
 app.use('/', deleteRoutes);
 
-var registerRoutes = require('./routes/register'); 
-app.use('/register', registerRoutes);
+
 
 const loginRoutes = require('./routes/login');
 app.use('/login', loginRoutes); 
@@ -145,6 +147,9 @@ app.post('/login', (req, res) => {
 } else { 
     // Login failed, respond with error message 
   res.send('Login failed'); } }); });
+
+var registerRoutes = require('./routes/register'); 
+app.use('/register', registerRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

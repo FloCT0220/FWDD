@@ -1,0 +1,22 @@
+extend layout 
+
+block content
+
+  h2 Inheritance in Python
+  p.text In Python, inheritance is a key object-oriented programming (OOP) concept that allows classes to inherit attributes and methods from other classes. It enables the creation of a new class (called the child class or subclass) that inherits characteristics from an existing class (called the parent class or superclass). This mechanism promotes code reuse and facilitates the creation of hierarchies of classes with shared behavior. Inheritance enables the child class to access and extend the functionality of the parent class, allowing for the implementation of specialized behavior while retaining the common attributes and methods defined in the parent class. Through inheritance, the child class can override methods from the parent class to customize their behavior or add new methods and attributes specific to the child class. This hierarchical structure facilitates modular design and makes code maintenance and scalability more manageable in large projects. Overall, inheritance plays a fundamental role in structuring and organizing code in Python's object-oriented programming paradigm.
+  h2 Benefits of inheritance are:
+  ol 
+    li.text Code Reusability: Inheritance allows you to reuse code from existing classes, reducing redundancy and promoting modular design. Common attributes and methods defined in a parent class can be inherited by multiple child classes, saving time and effort in writing and maintaining code.
+    li.text Modularity and Extensibility: By organizing classes into hierarchies, inheritance promotes modularity and extensibility in code. You can create specialized subclasses that inherit features from a common superclass, making it easier to add new functionality or modify existing behavior without altering the parent class.
+    li.text Promotes DRY Principle: Inheritance supports the Don't Repeat Yourself (DRY) principle by enabling you to define common behavior in one place (the parent class) and reuse it in multiple subclasses. This reduces the risk of errors and inconsistencies that may arise from duplicating code.
+    li.text Encourages Polymorphism: Inheritance facilitates polymorphism, allowing objects of different classes to be treated interchangeably if they share a common superclass. This promotes flexibility and simplifies code maintenance by enabling you to write generic code that operates on objects of various types.
+    li.text Facilitates Maintenance: Inheritance makes code maintenance easier by providing a clear and organized structure. Changes made to the functionality of a parent class automatically propagate to all its subclasses, ensuring consistency and reducing the risk of introducing errors.
+    li.text Supports Abstraction: Inheritance helps in creating abstract classes that define common behavior without specifying implementation details. Subclasses can then provide concrete implementations for abstract methods, allowing for customization while maintaining a consistent interface.
+  h2 Python Inheritance Syntax
+  p 
+   ol 
+    li.text Parent Class Declaration: First, you define the parent class using the class keyword followed by the class name (ParentClass in this example). Inside the class block, you can define attributes and methods that are common to all subclasses.
+    li.text Child Class Declaration: To create a subclass that inherits from the parent class, you define another class using the class keyword followed by the class name (ChildClass in this example). Inside the parentheses of the child class declaration, you specify the name of the parent class (ParentClass). This indicates that ChildClass inherits attributes and methods from ParentClass.
+    li.text Child Class Definition: Inside the child class block, you can define additional attributes and methods specific to the subclass. The child class inherits all attributes and methods from the parent class(es) and can also override methods or define new ones.
+    li.text Accessing Parent Class Members: Within the methods of the child class, you can access attributes and methods of the parent class using the super() function. This allows you to invoke parent class methods or access parent class attributes from the child class.
+    

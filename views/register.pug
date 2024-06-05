@@ -1,0 +1,19 @@
+doctype html 
+html 
+  head 
+    title User Registration 
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js") 
+    link(href="/stylesheets/register.css", rel="stylesheet") 
+  body 
+    form#register-form(method='post') 
+      h1 User Registration 
+      label(for='name') Name: 
+      input#name(type='text', name='name', required) 
+      label(for='email') Email: 
+      input#email(type='email', name='email', required) 
+      label(for='password') Password: 
+      input#password(type='password', name='password', required) 
+      button#register-button(type='submit') Register 
+      button#register-button(type='reset') Reset 
+      p#email-error 
+    script(src='/javascripts/checkEmail.js')

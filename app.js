@@ -31,6 +31,22 @@ db.connect((err) => {
 
 var app = express();
 
+// middle
+const session = require('express-session');
+app.use(session({ 
+  secret: 'fwdd', 
+  resave: false, 
+  saveUninitialized: true, 
+  cookie: { secure: true } // Note: the `secure` option should be enabled only if you are serving your app over HTTPS 
+}));
+
+app.use(function(req, res, next) { 
+  req.db = db; 
+  next(); 
+}); 
+
+//
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -43,6 +59,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+
+
 
 // route database
 const addressbookRoutes = require('./routes/addressbook')(db); 
@@ -57,24 +75,21 @@ app.use('/', editRoutes);
 const deleteRoutes = require('./routes/deleteContact')(db); 
 app.use('/', deleteRoutes);
 
-
-
 const loginRoutes = require('./routes/login');
 app.use('/login', loginRoutes); 
+
+const logoutRoutes = require('./routes/logout');
+app.use('/logout', logoutRoutes);
+
+var registerRoutes = require('./routes/register'); 
+app.use('/register', registerRoutes);
+
+
 
 var checkEmailRoute = require('./routes/email')(db); 
 app.use('/', checkEmailRoute);
 
-// middle
-const session = require('express-session');
-app.use(session({ 
-  secret: 'fwdd', 
-  resave: false, 
-  saveUninitialized: true, 
-  cookie: { secure: true } // Note: the `secure` option should be enabled only if you are serving your app over HTTPS 
-}));
-
-//
+///////////
 
 
 app.get('/course', (req, res) => { 
@@ -98,58 +113,65 @@ app.get('/map', (req, res) => {
   res.render('map'); 
 });
 
+app.get('/quiz', (req, res) => { 
+  res.render('quiz'); 
+});
+
+ app.get('/login', (req, res) => { 
+   res.render('login'); 
+ });
+
+
 
 // app.get('/login', (req, res) => { 
 //   res.render('login'); 
 // }); 
 
-app.get('/register', (req, res) => { 
-  res.render('register'); 
-});
+// app.get('/register', (req, res) => { 
+//   res.render('register'); 
+// });
 
-app.get('/dashboard', (req, res) => { 
-  if (!req.session.user) { // User is not logged in, redirect to login page 
-    res.redirect('/login'); 
-  } else { 
-    // User is logged in, render the dashboard 
-    res.render('dashboard', { user_name: req.session.user_name }); 
-  } 
+// app.get('/dashboard', (req, res) => { 
+//   if (!req.session.user) { // User is not logged in, redirect to login page 
+//     res.redirect('/login'); 
+//   } else { 
+//     // User is logged in, render the dashboard 
+//     res.render('dashboard', { user_name: req.session.user_name }); 
+//   } 
 
-  app.get('/logout', (req, res) => { 
-    req.session.destroy(err => { 
-      if(err) { 
-        // Handle error 
-        console.log(err); 
-        res.send('Error occurred during logout'); 
-      } else { 
-        // Redirect to login page after successful logout 
-        res.redirect('/login'); 
-      } 
-    }); 
-  });
-});
-
-app.use(function(req, res, next) { 
-  req.db = db; 
-  next(); 
-}); 
+//   app.get('/logout', (req, res) => { 
+//     req.session.destroy(err => { 
+//       if(err) { 
+//         // Handle error 
+//         console.log(err); 
+//         res.send('Error occurred during logout'); 
+//       } else { 
+//         // Redirect to login page after successful logout 
+//         res.redirect('/login'); 
+//       } 
+//     }); 
+//   });
+// });
 
 
 
-// Handle login form submission 
-app.post('/login', (req, res) => { 
-  let sql = 'SELECT * FROM user WHERE email = ? AND password = ?';
-   let query = db.query(sql, [req.body.useremail, req.body.userpassword], (err, result) => { if (err) throw err; if (result.length > 0) { 
-  // Login successful, set session and redirect to dashboard
-    req.session.user = result[0]; // Save the user object to the session 
-    req.session.user_name = result[0].user_name; 
-    res.redirect('/dashboard'); 
-} else { 
-    // Login failed, respond with error message 
-  res.send('Login failed'); } }); });
 
-var registerRoutes = require('./routes/register'); 
-app.use('/register', registerRoutes);
+
+
+// // Handle login form submission 
+// app.post('/login', (req, res) => { 
+//   let sql = 'SELECT * FROM users WHERE user_email = ? AND user_password = ?';
+//   let query = db.query(sql, [req.body.useremail, req.body.userpassword], (err, result) => { if (err) throw err; if (result.length > 0) { 
+//   // Login successful, set session and redirect to dashboard
+//   req.session.user = result[0]; // Save the user object to the session 
+//   req.session.user_name = result[0].user_name; 
+//   res.redirect('/'); 
+// } else { 
+//     // Login failed, respond with error message 
+//   res.send('Login failed'); } }); });
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -5,15 +5,18 @@ html
     link(href="/stylesheets/register.css", rel="stylesheet") 
     
   body 
+    include navigation
     form#register-form(action="/login" method="post") 
       h1 Login 
+      p(style="color: red;") #{error}
       div 
         label(for="useremail") Email: 
-        input#email(type="email" name="useremail", required) 
+        input#email(type="email" name="user_email", required) 
       div 
         label(for="userpassword") Password: 
-        input#password(type="password" name="userpassword", required) 
+        input#password(type="password" name="user_password", required) 
       div 
         input#register-button(type="submit" value="Login")
-        a(href="/") Go to Home
+        a(href="register")#page-link Register
         p#email-error 
+    include footer 

@@ -6,24 +6,57 @@ html
     link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     //- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
-    link(rel='stylesheet', href='/stylesheets/Layout.css')
+    link(rel='stylesheet', href='/stylesheets/navi.css')
   body
     block navBar
-      .d-inline-flex.navbar
-        .col-md-1.name
-          h1 Python 
-        .col.padding 
-          ul.nav.nav-pills
-            li.nav-item
-              a.nav-link(href="/") Home 
-            li.nav-item
-              a.nav-link(href="quiz") Quiz 
-            li.nav-item
-              a.nav-link(href="course") Courses 
-        .col.padding.loginButton
-            a.col-md-6.btn.btn-primary.gap(href="login")  Login 
-            a.col-md-6.btn.btn-primary.gap(href="register")  Signup
+      nav 
+        //- Not Full Screen 
+        ul.sidebar
+          li(onclick="hideSidebar()")
+            a(href="#")
+              svg(xmlns="http://www.w3.org/2000/svg", height="26", viewBox="0 96 960 960", width="26")
+                path(d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z")
+          li 
+            a(href="home") Home
+          li 
+            a(href="course") Courses
+          if user && user.teacher === true
+            li
+              a(href="quizEdit") Quiz Editing
+          
+          else  
+          if user && user.email
+            li
+              a(href="logout") Logout
+          else
+            li
+              a(href="login") Login
+
+        //- Full Screen
+        ul 
+          li 
+            a(href="home") Python 
+          li.hideOnMobile
+            a(href="course") Courses
+          if user && user.teacher === true
+            li.hideOnMobile
+              a(href="/displayQuestion") Quiz Editing
+          else  
+          if user && user.email
+            li.hideOnMobile
+              a(href="logout") Logout
+          else
+            li.hideOnMobile
+              a(href="login") Login
+          li.menu-button(onclick="showSidebar()")
+            a(href="#")
+              svg(xmlns="http://www.w3.org/2000/svg", height="26", viewBox="0 96 960 960", width="26")
+                path(d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z")
+
+
+          
     block content
-    script(src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous')
+    script(src="/javascripts/navi.js")
+    //- script(src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous')
            
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous')
+    //- script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous')

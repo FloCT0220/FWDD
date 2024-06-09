@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Quiz */
+.Title {
+    margin: 20px;
+}
+
+#question-container {
+    width: auto;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#question-text {
+    width: auto;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#answer-buttons {
+    margin-top: 8rem;
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+#true-btn {
+    font-size: 25px;
+    margin-right: 2em;
+    padding: 3em 5em 3em 5em;
+    font-weight: bold;
+    background-color: rgb(60, 255, 0);
+}
+
+#false-btn {
+    font-size: 25px;
+    margin-left: 2em;
+    padding: 3em 5em 3em 5em;
+    font-weight: bold;
+    color: #f0f0f0;
+    background-color: rgb(255, 0, 34);
+}
+
+#true-btn:hover {
+    background-color: rgb(188, 255, 188);
+}
+
+#false-btn:hover {
+    background-color: rgb(255, 185, 194);
+    color: #000000;
+}
+
+
+/* Quiz Edit */
+
+h1 {
+    text-align: center;
+}
+table, form {
+    width: auto;
+    height: auto;
+    margin: 20px auto;
+}
+table {
+    border-collapse: collapse;
+    text-align: center;
+
+}
+table td, table th {
+    line-height: 30px;
+    border: solid 1px black;
+}
+label, input {
+    display: block;
+    margin: 10px 0;
+    font-size: 20px;
+}
+button {
+    display: block;
+}
+
+.deleteBtn {
+    margin: 5px;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    
+    color: black;
+    background-color: rgb(255, 159, 159);
+}
+
+.editBtn {
+    margin: 5px;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    background-color: rgb(64, 195, 255);
+}
+
+.deleteBtn:hover {
+    text-decoration: none;
+    color: rgb(252, 252, 252);
+    background-color: rgb(255, 8, 8);
+}
+
+.editBtn:hover {
+    text-decoration: none;
+    color: rgb(252, 252, 252);
+    background-color: rgb(4, 0, 255);
+}

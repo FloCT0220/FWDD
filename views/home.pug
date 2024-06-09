@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title Home Page
+    link(rel='stylesheet', href='/stylesheets/home.css')
+  body
+    include navigation.pug 
+    block content
+        .wrapper
+            #box2
+                img(src="./images/wavehand.png", alt="")
+            #box1                
+                if user && user.email
+                    .intro Hello #{user.name}!
+                else
+                    .intro Hello Guest!
+                .Hi My Name is Lee Chui Teng and This is my assignment
+
+
+    include footer.pug

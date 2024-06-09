@@ -1,25 +1,66 @@
-var express = require('express'); 
-var router = express.Router(); 
+const express = require('express');
+const router = express.Router();
 
-//router.get('/login', (req, res) => { 
-//    res.render('login'); // display page
-//  });
-  
-  // Handle login form submission 
-router.post('/login', (req, res) => {
-    let sql = 'SELECT * FROM users WHERE user_email = ? AND user_password = ?';
-    let query = db.query(sql, [req.body.useremail, req.body.userpassword], (err, result) => {
-        if (err) throw err; 
-        if (result.length > 0) {
-        // Login successful, set session and redirect to dashboard
-        req.session.user = result[0]; // Save the user object to the session
-        req.session.user_name = result[0].user_name;
-        res.redirect('/dashboard');
+module.exports = (db) => {
+
+    router.get('/login', (req, res) => {
+        const error = req.session.error;
+        req.session.error = null; // Clear the error message
+        res.render('login', { error });
+    });
+
+    router.post('/login', (req, res) => {
+        const {
+            user_email,
+            user_password
+        } = req.body;
+
+
+        if (user_email && user_password) {
+            // Query student table
+            db.query('SELECT * FROM student WHERE student_email = ? AND student_password = ?', [user_email, user_password], (error, studentResults, fields) => {
+                if (studentResults.length > 0) {
+                    // If student found, set session variables and redirect
+                    req.session.student = true;
+                    req.session.user_email = user_email;
+                    req.session.user_id = studentResults[0].id;
+                    req.session.user_name = studentResults[0].student_name;
+                    res.redirect('home');
+                } else {
+                    // If no student found, query teacher table
+                    db.query('SELECT * FROM teacher WHERE teacher_email = ? AND teacher_password = ?', [user_email, user_password], (error, teacherResults, fields) => {
+                        if (teacherResults.length > 0) {
+                            // If teacher found, set session variables and redirect
+                            req.session.teacher= true;
+                            req.session.user_email = user_email;
+                            req.session.user_id = teacherResults[0].id;
+                            req.session.user_name = teacherResults[0].teacher_name;
+                            res.redirect('home');
+                        } else {
+                            // If neither student nor teacher found, render login page with error message
+                            res.render('login', { error: 'Incorrect Email and/or Password!' });
+                        }
+                        res.end();
+                    });
+                }
+            });
         } else {
-        // Login failed, respond with error message
-        res.send('Login failed');
-        } 
-    }); 
-});
+            res.send('Please enter Username and Password!');
+            res.end();
+        }
+    });
 
-module.exports = router
+    router.get('/logout', (req, res) => {
+        if (req.session) {
+            // delete session object
+            req.session.destroy(function(err) {
+                if(err) {
+                    return next(err);
+                } else {
+                    return res.redirect('home');
+                }
+            });
+        }
+      });
+    return router;
+};

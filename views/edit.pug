@@ -1,8 +1,0 @@
-extends layout 
-block content 
-
-  form(action=`/edit/${contact.id}`, method="post")
-  input(type="text", name="name", placeholder="Name", value=contact.name)
-  input(type="email", name="email", placeholder="Email", value=contact.email)
-  input(type="text", name="phone", placeholder="Phone", value=contact.phone)
-  button(type="submit") Edit Contact

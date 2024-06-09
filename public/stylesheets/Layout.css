@@ -4,7 +4,7 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   }
   
-  a {
+  a.nav-link {
     font-weight: bold;
   }
   .padding {
@@ -25,11 +25,11 @@ body {
     position: absolute;
     right: 25px;
   }
-  h1{
+  .WebName{
     position: absolute;
     left: 20px;
   }
-  
+ 
   .navbar{
     background-color: rgb(175, 255, 172);
     padding-bottom: 20px;

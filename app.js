@@ -4,48 +4,38 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 // database
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+const session = require('express-session');
 
-
-const db = mysql.createConnection({ 
+const db = mysql.createConnection({
   host: '127.0.0.1', 
   user: 'root', 
   password: '0220', 
   database: 'user', 
-}); 
-
-db.connect((err) => {
-  if (err) { 
-    console.error('Database connection failed:', err); 
-  } else { 
-    console.log('Connected to the database'); 
-  } 
 });
 
-
+db.connect((err) => {
+  if (err) {
+      console.error('Database connection failed:', err);
+  } else {
+      console.log('Connected to the database');
+  }
+});
 
 var app = express();
 
-// middle
-const session = require('express-session');
+// session config
+
 app.use(session({ 
   secret: 'fwdd', 
   resave: false, 
   saveUninitialized: true, 
-  cookie: { secure: true } // Note: the `secure` option should be enabled only if you are serving your app over HTTPS 
+  cookie: { secure: false } // Note: the `secure` option should be enabled only if you are serving your app over HTTPS 
 }));
 
-app.use(function(req, res, next) { 
-  req.db = db; 
-  next(); 
-}); 
 
-//
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -57,120 +47,37 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+
+///////// route database ////////////
+
+var indexRouter = require('./routes/index'); 4
 app.use('/', indexRouter);
+
+var usersRouter = require('./routes/users'); 9
 app.use('/user', usersRouter);
 
+const loginRoute = require('./routes/login')(db); 5
+app.use(loginRoute);
 
+const homeRoute = require('./routes/home')(db); 3
+app.use(homeRoute);
 
-// route database
-const addressbookRoutes = require('./routes/addressbook')(db); 
-app.use('/', addressbookRoutes); 
+const registerRoute = require('./routes/register')(db); 8
+app.use(registerRoute);
 
-const addRoutes = require('./routes/add')(db); 
-app.use('/', addRoutes);
+const courseRoute = require('./routes/course')(db); 2
+app.use(courseRoute);
 
-const editRoutes = require('./routes/editContact')(db); 
-app.use('/', editRoutes);
+const quizRoute = require('./routes/quiz')(db); 7
+app.use(quizRoute);
 
-const deleteRoutes = require('./routes/deleteContact')(db); 
-app.use('/', deleteRoutes);
+const manageRoute = require('./routes/manage')(db); 6
+app.use(manageRoute);
 
-const loginRoutes = require('./routes/login');
-app.use('/login', loginRoutes); 
-
-const logoutRoutes = require('./routes/logout');
-app.use('/logout', logoutRoutes);
-
-var registerRoutes = require('./routes/register'); 
-app.use('/register', registerRoutes);
-
-
-
-var checkEmailRoute = require('./routes/email')(db); 
-app.use('/', checkEmailRoute);
-
-///////////
-
-
-app.get('/course', (req, res) => { 
-  res.render('course'); 
-});
-
-app.get('/addressbook', (req, res) => { 
-  res.render('addressbook'); 
-});
-
-app.get('/apple_info', (req, res) => { 
-  res.render('apple_info'); 
-});
-app.get('/tab', (req, res) => { 
-  res.render('tab'); 
-});
-app.get('/vid', (req, res) => { 
-  res.render('vid'); 
-});
-app.get('/map', (req, res) => { 
-  res.render('map'); 
-});
-
-app.get('/quiz', (req, res) => { 
-  res.render('quiz'); 
-});
-
- app.get('/login', (req, res) => { 
-   res.render('login'); 
- });
-
-
-
-// app.get('/login', (req, res) => { 
-//   res.render('login'); 
-// }); 
-
-// app.get('/register', (req, res) => { 
-//   res.render('register'); 
-// });
-
-// app.get('/dashboard', (req, res) => { 
-//   if (!req.session.user) { // User is not logged in, redirect to login page 
-//     res.redirect('/login'); 
-//   } else { 
-//     // User is logged in, render the dashboard 
-//     res.render('dashboard', { user_name: req.session.user_name }); 
-//   } 
-
-//   app.get('/logout', (req, res) => { 
-//     req.session.destroy(err => { 
-//       if(err) { 
-//         // Handle error 
-//         console.log(err); 
-//         res.send('Error occurred during logout'); 
-//       } else { 
-//         // Redirect to login page after successful logout 
-//         res.redirect('/login'); 
-//       } 
-//     }); 
-//   });
-// });
-
-
-
-
-
-
-// // Handle login form submission 
-// app.post('/login', (req, res) => { 
-//   let sql = 'SELECT * FROM users WHERE user_email = ? AND user_password = ?';
-//   let query = db.query(sql, [req.body.useremail, req.body.userpassword], (err, result) => { if (err) throw err; if (result.length > 0) { 
-//   // Login successful, set session and redirect to dashboard
-//   req.session.user = result[0]; // Save the user object to the session 
-//   req.session.user_name = result[0].user_name; 
-//   res.redirect('/'); 
-// } else { 
-//     // Login failed, respond with error message 
-//   res.send('Login failed'); } }); });
-
-
+const addRoute = require('./routes/add')(db); 1
+app.use(addRoute);
 
 
 // catch 404 and forward to error handler

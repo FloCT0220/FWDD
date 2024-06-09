@@ -1,11 +1,33 @@
-include navigation
-include layout
+doctype html 
+html 
+  head 
+    title Login Page 
+    link(href="/stylesheets/quiz.css", rel="stylesheet") 
+  include navigation  
+  body 
+    
+    <h2 class= "Title"> Questions <span id="question-number"></span>/<span id="total-questions"></span> </h2>
+    #question-container
+      #question-text
+      #answer-buttons
+        button.btn#true-btn True 
+        button.btn#false-btn False 
+    
+    script(src="/javascripts/JSquiz.js") 
+  
+  include footer 
 
-block content 
-  p#questions Questions 
 
-  .ans
-    a(href="")#true True 
-    a(href="")#false False 
 
-include footer 
+//- include navigation
+//- include layout
+
+//- block content 
+//-   //- <div id="score-container">
+//-   //-   <h2>Your Score: <span id="score">0</span></h2>
+//-   //-   
+//-   //- </div>
+//-   //- <button class="btn" id="next-btn">Next Question</button>
+
+
+//- include footer 

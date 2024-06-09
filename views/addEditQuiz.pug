@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title Quiz Editing Page
+    link(href="/stylesheets/quiz.css", rel="stylesheet")
+
+  include navigation
+
+  body
+    h1 Quiz Editing
+
+    form(action= question ? `/EditQuiz/${question.id}` : '/add', method="POST")
+      .input-row
+        label(for="question") Question
+        // Display existing question if available
+        textarea(type="text", rows="4", cols="50", name="question", id="question") 
+          = question ? question.quiz_question : ''
+
+      .input-row
+        label(for="answer") Answer
+        select(name="answer", id="answer")
+          // Pre-select based on existing answer if available
+          option(value=1, selected=question && question.quiz_answer === true) True
+          option(value=0, selected=question && question.quiz_answer === false) False
+
+      button(type="submit") Submit
+
+  include footer

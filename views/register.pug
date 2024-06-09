@@ -5,15 +5,15 @@ html
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js") 
     link(href="/stylesheets/register.css", rel="stylesheet") 
   body 
+    include navigation
     form#register-form(method='post') 
       h1 User Registration 
       label(for='name') Name: 
-      input#name(type='text', name='name', required) 
+      input#name(type='text', name='user_name', required) 
       label(for='email') Email: 
-      input#email(type='email', name='email', required) 
+      input#email(type='email', name='user_email', required) 
       label(for='password') Password: 
-      input#password(type='password', name='password', required) 
+      input#password(type='password', name='user_password', required) 
       button#register-button(type='submit') Register 
-      button#register-button(type='logout') Reset 
+      a(href="login")#page-link Register
       p#email-error 
-    script(src='/javascripts/checkEmail.js')

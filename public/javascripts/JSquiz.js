@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchQuestions();
 
   trueButton.addEventListener('click', () => {
-    checkAnswer(1); // Assuming 1 represents true
+    checkAnswer(1); 
   });
 
   falseButton.addEventListener('click', () => {
-    checkAnswer(0); // Assuming 0 represents false
+    checkAnswer(0); 
   });
 
   function fetchQuestions() {
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(response => response.json())
       .then(data => {
         questions = data;
-        totalQuestionsElement.innerText = questions.length; // Set the total number of questions
+        totalQuestionsElement.innerText = questions.length; 
         displayQuestion(currentQuestionIndex);
       })
       .catch(error => console.error('Error fetching questions:', error));
@@ -38,20 +38,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function checkAnswer(userAnswer) {
     const currentQuestion = questions[currentQuestionIndex];
-    const correctAnswer = currentQuestion.quiz_answer; // Assuming quiz_answer is a boolean or string 'true'/'false'
+    const correctAnswer = currentQuestion.quiz_answer; 
 
-    if (userAnswer == correctAnswer) { // Using == to compare number with string if necessary
-      score++; // Increment score for correct answer
+    if (userAnswer == correctAnswer) { 
+      score++; 
     } else {
-      score; // Decrement score for incorrect answer
+      score; 
     }
 
-    // Move to the next question or end the game
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
-      displayQuestion(currentQuestionIndex); // Display the next question
+      displayQuestion(currentQuestionIndex); 
     } else {
-      endGame(); // Display final score if all questions are answered
+      endGame(); 
     }
   }
 
@@ -61,6 +60,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function endGame() {
     quizContainer.innerHTML = `<h2>Quiz completed! Your final score is: ${score}</h2>`;
-    // nextButton.style.display = 'none'; // Hide the next button after the quiz ends
   }
 });

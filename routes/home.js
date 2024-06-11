@@ -12,7 +12,6 @@ module.exports = (db) => {
         teacher: req.session.teacher || null,
         student: req.session.student || null,
       };
-      console.log(user)
       res.render('home', { user });
     });
   return router;

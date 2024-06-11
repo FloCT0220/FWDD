@@ -16,14 +16,6 @@ const db = mysql.createConnection({
   database: 'user', 
 });
 
-db.connect((err) => {
-  if (err) {
-      console.error('Database connection failed:', err);
-  } else {
-      console.log('Connected to the database');
-  }
-});
-
 var app = express();
 
 // session config
@@ -48,8 +40,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-
 ///////// route database ////////////
 
 var indexRouter = require('./routes/index'); 4
@@ -67,17 +57,11 @@ app.use(homeRoute);
 const registerRoute = require('./routes/register')(db); 8
 app.use(registerRoute);
 
-const courseRoute = require('./routes/course')(db); 2
-app.use(courseRoute);
-
 const quizRoute = require('./routes/quiz')(db); 7
 app.use(quizRoute);
 
 const manageRoute = require('./routes/manage')(db); 6
 app.use(manageRoute);
-
-const addRoute = require('./routes/add')(db); 1
-app.use(addRoute);
 
 
 // catch 404 and forward to error handler

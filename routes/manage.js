@@ -15,19 +15,15 @@ module.exports = (db) => {
     }
 
     router.get('/delete/:id', (req, res) => {
-        const user = getUser(req);
         const questionID = req.params.id;
-        const query = 'DELETE FROM quiz WHERE id = ?';
-        
+        const query = 'DELETE FROM quiz WHERE id = ?';        
         db.query(query, [questionID], (err, result) => {
             if (err) {
                 console.error('Error deleting quiz question:', err);
                 res.status(500).json({ error: 'Failed to delete quiz question' });
                 return;
-            }
-            
-            console.log(`Deleted question with ID ${questionID}`);
-            res.render('/displayQuestion' ,{ user }); // Redirect to /quizEdit after successful deletion
+            }            
+            res.redirect('/displayQuestion');
         });
     });
 
@@ -35,7 +31,6 @@ module.exports = (db) => {
         const user = getUser(req);
         const questionID = req.params.id;
         const query = 'SELECT * FROM quiz WHERE id = ?';
-        console.log(query)
         db.query(query, [questionID], (err, result) => {
             if (err) {
                 console.error('Error fetching question details:', err);
@@ -56,16 +51,9 @@ module.exports = (db) => {
         });
     });
 
-
-
-
-
-    router.post('/EditQuiz/:id', (req, res) => {
-        
-        const questionId = req.params.id;
-        
+    router.post('/EditQuiz/:id', (req, res) => {        
+        const questionId = req.params.id;        
         const { question, answer } = req.body;
-
         const query = 'UPDATE quiz SET quiz_question = ?, quiz_answer = ? WHERE id = ?';
         
         db.query(query, [question, answer, questionId], (err, result) => {
@@ -75,6 +63,25 @@ module.exports = (db) => {
         });
     });
 
+    router.get('/add', (req, res) => {
+        const user = getUser(req);
+        res.render('addEditQuiz', {user});
+    });
+
+    router.post('/add', (req, res) => {
+        const user = getUser(req);
+        const { question, answer } = req.body;
+        const query = 'INSERT INTO quiz (quiz_question, quiz_answer) VALUES (?, ?)';
+        
+        db.query(query, [question, answer], (err, results) => {
+            if (err) {
+                console.error('Error adding quiz question:', err);
+                return res.status(500).send('Error adding quiz question');
+            }
+            
+            res.redirect('/displayQuestion');
+        });
+    });
 
 
 

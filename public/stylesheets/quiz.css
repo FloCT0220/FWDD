@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
+    margin: 0px;
     padding: 0;
     background-color: #f0f0f0;
     min-height: 100vh;
@@ -17,7 +17,7 @@ body {
     width: auto;
     font-size: 40px;
     font-weight: bold;
-    margin-top: 20px;
+    margin: 20px 40px;
     text-align: center;
 }
 
@@ -30,25 +30,30 @@ body {
 }
 
 #answer-buttons {
-    margin-top: 8rem;
-    width: auto;
-    height: auto;
-    text-align: center;
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    margin-top: 5%;
 }
 
 #true-btn {
-    font-size: 25px;
-    margin-right: 2em;
-    padding: 3em 5em 3em 5em;
-    font-weight: bold;
+    width: 20%;
+    padding: 20px 40px;
+    margin: 0 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     background-color: rgb(60, 255, 0);
 }
 
 #false-btn {
-    font-size: 25px;
-    margin-left: 2em;
-    padding: 3em 5em 3em 5em;
-    font-weight: bold;
+    width: 20%;
+    padding: 20px 40px;
+    margin: 0 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     color: #f0f0f0;
     background-color: rgb(255, 0, 34);
 }
@@ -63,62 +68,176 @@ body {
 }
 
 
-/* Quiz Edit */
+/* Questions */
 
-h1 {
-    text-align: center;
-}
-table, form {
+table{
     width: auto;
     height: auto;
     margin: 20px auto;
+    
 }
-table {
+table{
     border-collapse: collapse;
-    text-align: center;
+    /* width: max-content;
+    height: auto; */
+    table-layout: fixed;     
 
 }
 table td, table th {
+   
+    text-align: center;
     line-height: 30px;
     border: solid 1px black;
 }
-label, input {
-    display: block;
-    margin: 10px 0;
-    font-size: 20px;
+table th{
+    padding: 10px;
 }
-button {
-    display: block;
+
+.heading-link-row {
+    display: flex;
+    justify-content: space-between; /* Align items with space between them */
+    align-items: center; /* Center align vertically */
+    padding:  0px 40px 0px 30px;
+}
+  
+.heading-link-row h2 {
+    margin: 0; /* Remove default margin */
+}
+
+/* Base Button Styles */
+.BTN{
+    display: inline-block;
+    width: 80px; /* Set a fixed width */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Specific Button Styles */
+.addBtn:hover{
+    background-color: #9bcbff;
+    color: #000000;
+}
+.editBtn:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(4, 0, 255);
+}
+.deleteBtn:hover{
+    color: rgb(252, 252, 252);
+    background-color: rgb(255, 8, 8);
+}
+.addBtn{
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 30px;
+    background-color: #007bff;
+    color: #fff;
 }
 
 .deleteBtn {
     margin: 5px;
-    border-radius: 5px;
-    padding: 5px 10px 5px 10px;
-    font-weight: bold;
-    
-    color: black;
     background-color: rgb(255, 159, 159);
 }
 
-.editBtn {
+.editBtn{
     margin: 5px;
-    border-radius: 5px;
-    padding: 5px 10px 5px 10px;
-    font-weight: bold;
-    text-decoration: none;
-    color: black;
     background-color: rgb(64, 195, 255);
 }
 
-.deleteBtn:hover {
-    text-decoration: none;
-    color: rgb(252, 252, 252);
-    background-color: rgb(255, 8, 8);
+/* Add/Edit */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+/* Input Row */
+.input-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.editBtn:hover {
-    text-decoration: none;
-    color: rgb(252, 252, 252);
-    background-color: rgb(4, 0, 255);
+/* Label */
+label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
 }
+
+/* Textarea */
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+/* Select Input */
+select {
+    padding: 10px;
+    font-size: 1em;
+}
+
+/* Button Row */
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Button */
+button {
+    width: 48%;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: #007bff;
+    
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #98caff;
+    color: #000000;
+}
+
+/* Back Button */
+.backBtn {
+    width: 48%;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 38px; /* Ensure line-height matches the height of the button */
+}
+
+.backBtn:hover {
+    background-color: #98caff;
+    text-decoration: none;
+    color: #000000;
+}
+
+/* Input Row for Select and Answer */
+    .input-row > label, .input-row > select {
+    width: auto;
+    display: inline-block;
+    margin-right: 10px;
+}
+

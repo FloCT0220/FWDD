@@ -8,12 +8,18 @@ html
     include navigation
     form#register-form(method='post') 
       h1 User Registration 
-      label(for='name') Name: 
-      input#name(type='text', name='user_name', required) 
-      label(for='email') Email: 
-      input#email(type='email', name='user_email', required) 
-      label(for='password') Password: 
-      input#password(type='password', name='user_password', required) 
+      p(style="color: red;") #{error}
+      .input-control
+        label(for='name') Name: 
+        input#name(type='text', name='user_name', required) 
+      .input-control
+        label(for='email') Email: 
+        input#email(type='email', name='user_email', required) 
+      .input-control
+        label(for='password') Password: 
+        input#password(type='password', name='user_password', required) 
       button#register-button(type='submit') Register 
-      a(href="login")#page-link Register
+      a(href="login")#page-link Back
       p#email-error 
+
+include footer

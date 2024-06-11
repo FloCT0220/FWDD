@@ -22,7 +22,7 @@ html
             a(href="course") Courses
           if user && user.teacher === true
             li
-              a(href="quizEdit") Quiz Editing
+              a(href="quizEdit") Questions
           
           else  
           if user && user.email
@@ -35,12 +35,14 @@ html
         //- Full Screen
         ul 
           li 
-            a(href="home") Python 
+            a(href="home") PyLearn 
+          li.hideOnMobile 
+            a(href="home") Home
           li.hideOnMobile
             a(href="course") Courses
           if user && user.teacher === true
             li.hideOnMobile
-              a(href="/displayQuestion") Quiz Editing
+              a(href="/displayQuestion") Questions
           else  
           if user && user.email
             li.hideOnMobile

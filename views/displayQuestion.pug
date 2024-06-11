@@ -7,8 +7,10 @@ html
   include navigation
 
   body
-    h1 Quiz Editing
-    a(href="/add") Add Questions
+    .heading-link-row
+      h1 Questions
+      a.addBtn(href="/add") Add Questions
+   
     .container
       table
         thead
@@ -17,12 +19,11 @@ html
             th Answer
             th Actions 
         tbody
-          each question in formattedResults
-            
+          each question in formattedResults            
             tr
               td= question.quiz_question
               td= question.quiz_answer ? 'True' : 'False'            
               td
-                a.deleteBtn(href="delete/"+question.id) Delete 
-                a.deleteBtn(href="EditQuiz/"+question.id) Edit 
+                a.BTN.deleteBtn(href="delete/"+question.id) Delete 
+                a.BTN.editBtn(href="EditQuiz/"+question.id) Edit 
   include footer
